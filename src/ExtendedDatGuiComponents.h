@@ -14,27 +14,27 @@
 //----------------------------------------------
 class OnOffToggle : public ofxDatGuiToggle{
 public:
-    
+
     OnOffToggle(string label, bool enabled) : ofxDatGuiToggle(label, enabled){
-        
+
         colorOn = ofColor::white;
         colorOff = ofColor::gray;
-    
+
     };
-    
+
     void setColors(ofColor on, ofColor off){
         colorOn = on;
         colorOff = off;
     }
-    
+
     void drawTransparent(){
         if (mVisible) {
-        
+
             ofPushStyle();
- 
+
             ofNoFill();
             ofSetLineWidth(0.5);
-            
+
             if (mEnabled == true){
                 ofSetColor(colorOn);
                 ofDrawRectangle(x, y, mStyle.width, mStyle.height);
@@ -47,7 +47,7 @@ public:
             ofPopStyle();
         }
     }
-    
+
 private:
     ofColor colorOn;
     ofColor colorOff;
@@ -56,29 +56,29 @@ private:
 //----------------------------------------------
 class CustomSlider : public ofxDatGuiSlider{
 public:
-    
-    
+
+
     CustomSlider(string label, float min, float max, double val): ofxDatGuiSlider(label, min, max, val){
-        
+
         colorFill   = ofColor::white;
         colorBack   = ofColor::darkGray;
         colorLabel  = ofColor::yellow;
-        
+
     }
-    
-    
+
+
     ~CustomSlider(){
         setFocused(false);
     }
-    
+
     void setColors(ofColor back, ofColor label, ofColor fill){
         colorBack = back;
         colorLabel = label;
         colorFill = fill;
     }
-    
 
-    
+
+
     void drawSimplified(){
         if (!mVisible) return;
         ofPushStyle();
@@ -94,19 +94,19 @@ public:
             ofDrawRectangle(x, y, mStyle.width * mScale, mStyle.height);
         }
         // numeric input field //
-        
+
        // mInput->draw();
-        
+
         //label
         ofSetColor(colorLabel);
         string displayStr = mLabel.text + ": " + ofToString(getValue());
         mFont->draw(displayStr , x+mLabel.x, y+mStyle.height/2 + mLabel.rect.height/2);
         //mFont->draw(ofToString(getValue()), x+mLabel.x, y+mStyle.height/2 + mLabel.rect.height/2);
-        
+
         ofPopStyle();
-        
+
     }
-    
+
     void onMousePress(ofPoint m)
     {
         ofxDatGuiComponent::onMousePress(m);
@@ -116,7 +116,7 @@ public:
 //            mInput->onFocusLost();
 //        }
     }
-    
+
     void onMouseDrag(ofPoint m)
     {
         if (mFocused && mInput->hasFocus() == false){
@@ -131,17 +131,16 @@ public:
             if (mTruncateValue) mValue = round(mValue, mPrecision);
             //setTextInput();
             dispatchSliderChangedEvent();
-            
+
         }
     }
-    
+
 private:
-    
+
     ofColor colorBack;
     ofColor colorFill;
     ofColor colorLabel;
-   
-    
+
 };
 //----------------------------------------------
 class PeakMeterButton : public ofxDatGuiButton{
@@ -150,27 +149,25 @@ public:
     PeakMeterButton(string label) : ofxDatGuiButton(label){
         gralColor = ofColor::red;
     };
-    
+
     void setColor(ofColor color){gralColor = color;}
-    
+
     void draw(){
-        
+
         if (mVisible) {
             // anything that extends ofxDatGuiButton has the same rollover effect //
             ofPushStyle();
-            
+
             if (mStyle.border.visible) drawBorder();
             ofNoFill();
             ofSetColor(gralColor);
             mFont->draw(mLabel.text , x+mLabel.x, y+mStyle.height/2 + mLabel.rect.height/2);
-            
+
             ofPopStyle();
         }
-    
+
     }
-    
+
 private:
     ofColor gralColor;
-    
-    
 };

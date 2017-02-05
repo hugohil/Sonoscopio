@@ -48,40 +48,40 @@ enum analysisMode{
 class ofApp : public ofBaseApp{
 
   public:
-	
+
     void setup();
-	void update();
-	void draw();
+    void update();
+    void draw();
     void exit();
 
-	void keyPressed(int key);
-	void keyReleased(int key);
-	void mouseMoved(int x, int y );
-	void mouseDragged(int x, int y, int button);
-	void mousePressed(int x, int y, int button);
-	void mouseReleased(int x, int y, int button);
-	void windowResized(int w, int h);
-	void dragEvent(ofDragInfo dragInfo);
-	void gotMessage(ofMessage msg);
-    
+    void keyPressed(int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y );
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void windowResized(int w, int h);
+    void dragEvent(ofDragInfo dragInfo);
+    void gotMessage(ofMessage msg);
+
     void togglePlay();
     void stop();
     void rewind();
-    
+
     void openAudioFile(string filename);
     void onTimelinePanelResize(int & h);
-    
+
     void setFrameRate(int fps);
     void setAnalysisMode(analysisMode mode);
     void resetAnalysisEngine();
     void setBufferSize(int bs);
-    
+
     void setOscSender(string host, int port);
     void setOscSenderHost(string host);
     void setOscSenderPort(int port);
     void sendOscData();
     void setIsSendingOsc(bool b){_bSendOsc = b;}
-    
+
     int getFrameRate(){return _frameRate;}
     int getSampleRate(){return _samplerate;}
     int getBufferSize(){return _bufferSize;}
@@ -91,12 +91,12 @@ class ofApp : public ofBaseApp{
     string getSoundfilePath(){return timePanel.audioTrack->getSoundfilePath();}
     float getDurationInSeconds(){return timePanel.timeline.getDurationInSeconds();}
     string getProjectDir(){return _projectDir;}
-    
+
     void saveSettings();
     void loadSettings();
-    
+
     void openProject(string projectDir);
-    
+
     void saveAnalysisDataToFile();
     void drawSavingAnalysisSign();
 
@@ -104,40 +104,35 @@ class ofApp : public ofBaseApp{
     MainPanel mainPanel;
     TimelinePanel timePanel;
     MetersPanel metersPanel;
-    
+
     ofxAudioAnalyzer mainAnalyzer;
-    
+
     AnalysisDataSaver dataSaver;
-    
 
 private:
-    
+
     ofSoundBuffer soundBuffer;
     ofxOscSender oscSender;
-    
+
     int _frameRate;
     //int _totalFramesNum;
-    
+
     int _samplerate;
     int  _bufferSize;
     int _channelsNum;
-    
+
     ofMutex audioMutex;
-    
+
     analysisMode _currentAnalysisMode;
-    
+
     bool _bSendOsc;
     string _oscHost;
     int _oscPort;
     bool _bSendOscVectorValues;
-    
+
     string _projectDir;
-    
-    ofTrueTypeFont	verdana;
-    
-    
-    
-    
+
+    ofTrueTypeFont  verdana;
 };
 
 
